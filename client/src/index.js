@@ -39,11 +39,11 @@ const ErrorBoundary = Bugsnag.getPlugin('react')
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ErrorBoundary>
+  <ErrorrBoundary>
   <React.StrictMode>
     <App />
   </React.StrictMode>
-  </ErrorBoundary>
+  </ErrorrBoundary>
 );
 
 // If you want to start measuring performance in your app, pass a function
