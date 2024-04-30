@@ -2,48 +2,41 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+// import reportWebVitals from './reportWebVitals';
 
-import Bugsnag from '@bugsnag/js'
-import bugsnagReact from '@bugsnag/plugin-react'
-import BugsnagPluginReact from '@bugsnag/plugin-react'
+import Bugsnag from '@bugsnag/js';
+// import bugsnagReact from '@bugsnag/plugin-react'
+import BugsnagPluginReact from '@bugsnag/plugin-react';
+import BugsnagPerformance from '@bugsnag/browser-performance';
 
-// Bugsnag.init('13e2a73539267efa439c55c579882e73')
-// Bugsnag.use(bugsnagReact, React)
+// api key is from bugsnag - settings cog, project settings, SDK API key - it goes below
 Bugsnag.start({
-  apiKey: '13e2a73539267efa439c55c579882e73',
+  apiKey: 'd62ea4c7c3ce8b5c74423a9dd8bda4b6',
   plugins: [new BugsnagPluginReact()]
 })
+BugsnagPerformance.start({ apiKey: 'd62ea4c7c3ce8b5c74423a9dd8bda4b6' })
 
+// then from the project:
+// My account, Personal auth tokens, generate new token, name, generate, copy
+// ClickUp, bugsnag, bs to cu, name account, paste api token, copy webhook url
+// BugSnag, projets, click project, data forwarding, webhook, paste webhook url
+// notify me when - every time an error occurs
 
-// const ErrorBoundary = Bugsnag.getPlugin('react').createErrorBoundary()
-
-// const ErrorScreen = () =>
-//   <div>
-//     <h1><span role="img" aria-label="warning icon">⚠️</span> Error <span role="img" aria-label="warning icon">⚠️</span></h1>
-//     <p><strong>Uh oh, there was an error in the component tree!</strong></p>
-//     <p>This <code>FallbackComponent</code> prop can be used to show something useful to your users when such errors occur.</p>
-//   </div>
-
-// const onError = event => {
-//   // You can also provide an onError callback to run just on errors caught by
-//   // the error boundary. Maybe you want to attach some of the current state from
-//   // whatever model/store you're using (e.g redux)
-//   console.log('about to send this event', { event })
-// }
+// create a new project for setup instructions 
 
 const ErrorBoundary = Bugsnag.getPlugin('react')
   .createErrorBoundary(React)
 
+  Bugsnag.notify(new Error('Test error'))
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ErrorrBoundary>
+  <ErrorBoundary>
   <React.StrictMode>
     <App />
   </React.StrictMode>
-  </ErrorrBoundary>
+  </ErrorBoundary>
 );
 
 // If you want to start measuring performance in your app, pass a function
